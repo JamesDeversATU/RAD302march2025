@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Rad302feWebAPI2025.DataLayer;
 using System.Text;
 using Tracker.WebAPIClient;
 
@@ -13,12 +15,15 @@ namespace Rad302feWebAPI2025
             var builder = WebApplication.CreateBuilder(args);
 
             ActivityAPIClient.Track(StudentID: "S00236260", StudentName: "James Mccafferty Devers", activityName: "Rad302 fe March 2025", Task: "Seeding Data");
-
+            //confure the program class to use the applicationdb context and add this missiing lines
             // For CORS on localhost
             string LocalAllowSpecificOrigins = "_localAllowSpecificOrigins";
 
             // Add services to the container.
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -99,3 +104,4 @@ namespace Rad302feWebAPI2025
         }
     }
 }
+// cant do it wont work this is how to do it Add-Migration Initial-Schema
