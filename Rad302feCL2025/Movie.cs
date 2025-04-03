@@ -19,7 +19,7 @@ namespace Rad302feCL2025
 
         [JsonIgnore]
         public virtual Genre MovieGenre { get; set; }
-
+        //chage to int 
 
 
     }
