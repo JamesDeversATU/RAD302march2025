@@ -15,7 +15,7 @@ namespace Rad302feCL2025
 
         [ForeignKey("MovieGenre")]
         public int GenreId { get; set; }
-        public DateOnly? ReleaseDate { get; set; }
+        public int? ReleaseDate { get; set; }
 
         [JsonIgnore]
         public virtual Genre MovieGenre { get; set; }
