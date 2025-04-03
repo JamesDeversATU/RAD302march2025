@@ -16,8 +16,8 @@ namespace Rad302ConsoleApp2025
 
             ActivityAPIClient.Track(StudentID: "s00236260", StudentName: "James Mccafferty Devers", activityName: "Rad302 fe March 2025", Task: "Q1e Implementing Console queries");
 
+            var token = await GetAuthTokenAsync("bob.bloggs@example.com", "yourpassword");
 
-          
             if (string.IsNullOrEmpty(token))
             {
                 Console.WriteLine("Failed to retrieve token.");
@@ -48,7 +48,7 @@ namespace Rad302ConsoleApp2025
             var selectedGenre = genres[0];
             Console.WriteLine($"chose genera: {  selectedGenre.Name}");
 
-            var movies = await GetMoviesByGenreIdAsync(token,selectedGenre.Id);
+            var movies = await GetMoviesByGenreAsync(token,selectedGenre.Id);
             if (movies != null || movies.count == 0)
             {
                 foreach (var movie in movies)
@@ -60,13 +60,13 @@ namespace Rad302ConsoleApp2025
 
             Console.WriteLine("Movies list for:" + selectedGenre.name + ";");
 
-            for (int i = 0; i < movies.Count; i++)
+            for (int i = 0; i < movies.count; i++)
             {
                 Console.WriteLine($"ID: {movies[i].Id}, Title: {movies[i].Title}");
             }
 
             var selectedMovie = movies[0];
-            Console.WriteLine($"chose movie: {selectedMovie.Title}")({ selectedMovie.releasedate})");
+            Console.WriteLine($"chose movie: {selectedMovie.Title}") ({selectedMovie.releasedate});
 
         }
 
@@ -79,7 +79,7 @@ namespace Rad302ConsoleApp2025
             var loginpayload = new
             {
                 username = username,
-                password = password
+                password = passowrd
             };
 
             var content = new StringContent(JsonSerializer.Serialize(loginpayload), Encoding.UTF8, "application/json");
